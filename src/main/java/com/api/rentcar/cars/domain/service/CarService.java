@@ -13,4 +13,6 @@ public interface CarService {
     Car getById(Long carId);
     Car create(Long brandId,Long ownerId,Car car);
     ResponseEntity<?> delete(Long carId);
+    List<Car> getCarsNotRent();
+    Car setState(Long carId);
 }

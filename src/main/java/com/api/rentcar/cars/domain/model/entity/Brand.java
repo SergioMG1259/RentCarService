@@ -24,6 +24,8 @@ public class Brand implements Serializable{
     @NotNull
     @Size(max = 30)
     private String name;
+    @NotNull
+    private String image;
 
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @OneToMany(

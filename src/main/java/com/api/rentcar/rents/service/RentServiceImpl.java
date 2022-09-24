@@ -59,7 +59,16 @@ public class RentServiceImpl implements RentService {
                 .orElseThrow(() -> new ResourceNotFoundException("Reservation", reservationId));
         rent.setReservation(reservation);
         Car car=reservation.getCar();
+        if(car.getState()==1){
+            return null;
+        }
+        rent.setStatus(0);
         carRepository.findById(car.getId()).map(carAux->carRepository.save(carAux.withState(1)));
         return rentRepository.save(rent);
+    }
+
+    @Override
+    public List<Rent> getRentsByClientId(Long clientId) {
+        return rentRepository.getRentsByClientId(clientId);
     }
 }

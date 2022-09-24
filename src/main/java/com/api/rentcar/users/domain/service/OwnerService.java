@@ -13,4 +13,5 @@ public interface OwnerService {
     Owner getById(Long ownerId);
     Owner create(Owner owner);
     Owner updatePlan(Long ownerId, Long planId);
+    Owner AuthOwner(String email,String password);
 }

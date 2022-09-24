@@ -13,4 +13,5 @@ public interface FavoriteService {
     Favorite getById(Long favoriteId);
     Favorite create(Long clientId,Long carId);
     ResponseEntity<?> delete(Long favoriteId);
+    List<Favorite> getFavoritesByClient(Long clientId);
 }

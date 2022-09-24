@@ -11,4 +11,5 @@ public class RentResource {
     private Long id;
     private Date payDate;
     private ReservationResource reservation;
+    private int status;
 }

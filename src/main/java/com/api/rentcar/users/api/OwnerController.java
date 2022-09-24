@@ -40,4 +40,10 @@ public class OwnerController {
                                          @PathVariable("planId")Long planId){
         return mapper.toResource(ownerService.updatePlan(ownerId,planId));
     }
+
+    @GetMapping("email/{email}/password/{password}")
+    public OwnerResource getOwnerById(@PathVariable("email")String email,
+                                      @PathVariable("password")String password){
+        return  mapper.toResource(ownerService.AuthOwner(email,password));
+    }
 }

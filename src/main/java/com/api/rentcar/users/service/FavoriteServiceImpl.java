@@ -75,4 +75,9 @@ public class FavoriteServiceImpl implements FavoriteService {
             return ResponseEntity.ok().build();
         }).orElseThrow(() -> new ResourceNotFoundException(ENTITY, favoriteId));
     }
+
+    @Override
+    public List<Favorite> getFavoritesByClient(Long clientId) {
+        return favoriteRepository.getCarsFavoritesClientId(clientId);
+    }
 }

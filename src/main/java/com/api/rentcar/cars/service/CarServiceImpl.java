@@ -64,7 +64,16 @@ public class CarServiceImpl implements CarService {
                 .orElseThrow(() -> new ResourceNotFoundException("Owner", ownerId));
         car.setOwner(owner);
         car.setRating(0.0);
-        return carRepository.save(car);
+        if(owner.getPlan().getName()=="Free" && owner.getCars().size()<2){
+            return carRepository.save(car);
+        }
+        if(owner.getPlan().getName()=="Medium" && owner.getCars().size()<4){
+            return carRepository.save(car);
+        }
+        if(owner.getPlan().getName()=="Pro" && owner.getCars().size()<6){
+            return carRepository.save(car);
+        }
+        return null;
     }
 
     @Override
@@ -73,5 +82,19 @@ public class CarServiceImpl implements CarService {
             carRepository.delete(car);
             return ResponseEntity.ok().build();
         }).orElseThrow(() -> new ResourceNotFoundException(ENTITY, carId));
+    }
+
+    @Override
+    public List<Car> getCarsNotRent() {
+        return carRepository.getCarsNotRents();
+    }
+
+    @Override
+    public Car setState(Long carId) {
+        Car car=carRepository.findById(carId)
+                .orElseThrow(()->new ResourceNotFoundException(ENTITY,carId));
+        carRepository.save(car.withState(1));
+        car.setState(1);
+        return car;
     }
 }

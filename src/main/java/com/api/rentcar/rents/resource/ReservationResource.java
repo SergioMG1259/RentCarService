@@ -1,6 +1,7 @@
 package com.api.rentcar.rents.resource;
 
 import com.api.rentcar.cars.resource.CarResource;
+import com.api.rentcar.users.resource.ClientResource;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,4 +16,5 @@ public class ReservationResource {
     private Double mount;
     private int status;
     private CarResource car;
+    private ClientResource client;
 }

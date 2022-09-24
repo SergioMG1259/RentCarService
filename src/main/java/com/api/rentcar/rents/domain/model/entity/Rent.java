@@ -22,6 +22,8 @@ public class Rent implements Serializable {
     @DateTimeFormat(pattern = "MM-dd-yyyy")
     private Date payDate;
 
+    private int status;
+
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "reservation_id", referencedColumnName = "id")
     private Reservation reservation;

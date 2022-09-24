@@ -10,4 +10,6 @@ import javax.validation.constraints.NotNull;
 public class CreateBrandResource {
     @NotNull
     private String name;
+    @NotNull
+    private String image;
 }

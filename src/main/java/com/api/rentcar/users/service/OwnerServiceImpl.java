@@ -69,4 +69,10 @@ public class OwnerServiceImpl implements OwnerService {
         /*owner.setPlan(plan);*/
         return owner;
     }
+
+    @Override
+    public Owner AuthOwner(String email, String password) {
+        return ownerRepository.findByEmailAndPassword(email,password)
+                .orElseThrow(()->new ResourceNotFoundException("Owner Not Found"));
+    }
 }

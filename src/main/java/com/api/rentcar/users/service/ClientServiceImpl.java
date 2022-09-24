@@ -50,4 +50,10 @@ public class ClientServiceImpl implements ClientService {
         client.setRating(0.0);
         return clientRepository.save(client);
     }
+
+    @Override
+    public Client AuthClient(String email, String password) {
+        return clientRepository.findByEmailAndPassword(email,password)
+                .orElseThrow(()->new ResourceNotFoundException("Client not Found"));
+    }
 }

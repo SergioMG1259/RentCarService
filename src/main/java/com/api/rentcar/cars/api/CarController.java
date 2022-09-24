@@ -26,6 +26,10 @@ public class CarController {
     public Page<CarResource> getAllCars(Pageable pageable){
         return mapper.modelListToPage(carService.getAll(),pageable);
     }
+    @GetMapping("notRents")
+    public Page<CarResource> getAllCarsNotRent(Pageable pageable){
+        return mapper.modelListToPage(carService.getCarsNotRent(),pageable);
+    }
 
     @GetMapping("{carId}")
     public CarResource getCarById(@PathVariable Long carId){

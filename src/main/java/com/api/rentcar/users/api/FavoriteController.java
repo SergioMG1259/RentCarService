@@ -41,4 +41,8 @@ public class FavoriteController {
     public ResponseEntity<?> deleteFavorite(@PathVariable Long favoriteId) {
         return favoriteService.delete(favoriteId);
     }
+    @GetMapping("client/{clientId}")
+    public Page<FavoriteResource> getFavoriteByClientId(@PathVariable Long clientI,Pageable pageable){
+       return mapper.modelListToPage(favoriteService.getFavoritesByClient(clientI),pageable);
+    }
 }

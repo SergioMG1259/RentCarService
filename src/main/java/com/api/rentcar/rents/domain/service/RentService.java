@@ -12,5 +12,6 @@ public interface RentService {
     Page<Rent> getAll(Pageable pageable);
     Rent getById(Long rentId);
     Rent create(Long reservationId,Rent rent);
+    List<Rent> getRentsByClientId(Long clientId);
     /*ResponseEntity<?> delete(Long rentId);*/
 }

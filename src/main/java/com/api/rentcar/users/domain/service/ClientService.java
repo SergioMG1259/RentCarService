@@ -11,4 +11,5 @@ public interface ClientService {
     Page<Client> getAll(Pageable pageable);
     Client getById(Long clientId);
     Client create(Client client);
+    Client AuthClient(String email, String password);
 }

@@ -36,4 +36,10 @@ public class ClientController {
     public ClientResource createClient(@Valid @RequestBody CreateClientResource request){
         return mapper.toResource(clientService.create(mapper.toModel(request)));
     }
+
+    @GetMapping("email/{email}/password/{password}")
+    public ClientResource getClientById(@PathVariable("email")String email,
+                                        @PathVariable("password")String password){
+        return  mapper.toResource(clientService.AuthClient(email,password));
+    }
 }

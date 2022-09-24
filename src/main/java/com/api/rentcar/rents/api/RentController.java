@@ -36,4 +36,9 @@ public class RentController {
                                    @Valid @RequestBody CreateRentResource request){
         return mapper.toResource(rentService.create(reservationId,mapper.toModel(request)));
     }
+    @GetMapping("client/{clientId}")
+    public Page<RentResource> getAllRentsByClientId(@PathVariable("clientId")Long clientId,
+                                                    Pageable pageable){
+        return mapper.modelListToPage(rentService.getRentsByClientId(clientId),pageable);
+    }
 }

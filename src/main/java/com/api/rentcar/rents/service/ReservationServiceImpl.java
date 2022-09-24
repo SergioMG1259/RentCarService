@@ -68,6 +68,9 @@ public class ReservationServiceImpl implements ReservationService {
         Car car=carRepository.findById(carId)
                 .orElseThrow(() -> new ResourceNotFoundException("Car", carId));
 
+        if(car.getState()!=0){
+            return null;
+        }
         Double costPerDay=car.getDayCost();
         Long duration=reservation.getReturnDate().getTime()-reservation.getReserveDate().getTime();
         Long daysDifference= TimeUnit.MILLISECONDS.toDays(duration);
@@ -75,7 +78,18 @@ public class ReservationServiceImpl implements ReservationService {
         reservation.setClient(client);
         reservation.setCar(car);
         reservation.setMount(costPerDay*daysDifference);
-        return reservationRepository.save(reservation);
+
+        /*if(reservation.getClient().getRating()>2.0 ||
+                (reservation.getClient().getRating()<=2.0 && reservation.getClient().getReservations().size()<=3)){
+            carRepository.findById(car.getId()).map(carAux->carRepository.save(carAux.withState(2)));
+            return reservationRepository.save(reservation);
+        }*/
+        if(reservation.getClient().getRating()>2.0 ||
+                (reservation.getClient().getRating()<=2.0 && rentRepository.getRentsByClientId(clientId).size()<=3)) {
+            carRepository.findById(car.getId()).map(carAux -> carRepository.save(carAux.withState(2)));
+            return reservationRepository.save(reservation);
+        }
+        return null;
     }
 
     @Override
@@ -91,6 +105,7 @@ public class ReservationServiceImpl implements ReservationService {
         Reservation reservation=reservationRepository.findById(reservationId).map(reservationAux->
                 reservationRepository.save(reservationAux.withStatus(status))).
                 orElseThrow(()->new ResourceNotFoundException(ENTITY,reservationId));
+        reservation.setStatus(status);
         return reservation;
     }
 
