@@ -37,9 +37,9 @@ public class CarController {
     }
 
     @PostMapping("owner/{ownerId}/brand/{brandId}")
-    public CarResource createCar(@Valid @RequestBody CreateCarResource request,
-                                 @PathVariable("ownerId")Long ownerId,
-                                 @PathVariable("brandId")Long brandId){
+    public CarResource createCar(@PathVariable("ownerId")Long ownerId,
+                                 @PathVariable("brandId")Long brandId,
+                                 @Valid @RequestBody CreateCarResource request){
         return mapper.toResource(carService.create(brandId,ownerId,mapper.toModel(request)));
     }
     @DeleteMapping("{carId}")

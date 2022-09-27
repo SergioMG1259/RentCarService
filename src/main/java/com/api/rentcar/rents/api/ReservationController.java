@@ -54,6 +54,16 @@ public class ReservationController {
                                             @PathVariable("status")int status){
         return mapper.toResource(reservationService.updateStatus(reservationId,status));
     }
+    @PutMapping("cancel/{reservationId}")
+    public ReservationResource cancelReservation(@PathVariable("reservationId")Long reservationId)
+    {
+        return mapper.toResource(reservationService.cancel(reservationId));
+    }
+    @PutMapping("cancelPay/{reservationId}")
+    public ReservationResource cancelPay(@PathVariable("reservationId")Long reservationId)
+    {
+        return mapper.toResource(reservationService.cancelPay(reservationId));
+    }
     @GetMapping("owner/{ownerId}")
     public Page<ReservationResource> getReservationsByOwner(Pageable pageable,
                                                          @PathVariable("ownerId") Long ownerId){
@@ -63,5 +73,10 @@ public class ReservationController {
     public RentResource pay(@PathVariable("reservationId")Long reservationId,
                                           @Valid @RequestBody CreateRentResource request){
         return rentMapper.toResource(reservationService.pay(reservationId,rentMapper.toModel(request)));
+    }
+    @GetMapping("client/{clientId}")
+    public Page<ReservationResource> getReservationsByClient(Pageable pageable,
+                                                            @PathVariable("clientId") Long clientId){
+        return mapper.modelListToPage(reservationService.getReservationsByClient(clientId),pageable);
     }
 }

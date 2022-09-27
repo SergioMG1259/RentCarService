@@ -110,6 +110,28 @@ public class ReservationServiceImpl implements ReservationService {
     }
 
     @Override
+    public Reservation cancel(Long reservationId) {
+        Reservation reservation=reservationRepository.findById(reservationId).map(reservationAux->
+                        reservationRepository.save(reservationAux.withStatus(2))).
+                orElseThrow(()->new ResourceNotFoundException(ENTITY,reservationId));
+        reservation.setStatus(2);
+        Car car=reservation.getCar();
+        carRepository.findById(car.getId()).map(carAux->carRepository.save(carAux.withState(0)));
+        return reservation;
+    }
+
+    @Override
+    public Reservation cancelPay(Long reservationId) {
+        Reservation reservation=reservationRepository.findById(reservationId).map(reservationAux->
+                        reservationRepository.save(reservationAux.withStatus(3))).
+                orElseThrow(()->new ResourceNotFoundException(ENTITY,reservationId));
+        reservation.setStatus(2);
+        Car car=reservation.getCar();
+        carRepository.findById(car.getId()).map(carAux->carRepository.save(carAux.withState(0)));
+        return reservation;
+    }
+
+    @Override
     public Rent pay(Long reservationId, Rent rent) {
         Reservation reservation=reservationRepository.findById(reservationId)
                 .orElseThrow(()->new ResourceNotFoundException(ENTITY,reservationId));
@@ -122,5 +144,10 @@ public class ReservationServiceImpl implements ReservationService {
     @Override
     public List<Reservation> getReservationsByOwner(Long ownerId) {
         return reservationRepository.getReservationsByOwner(ownerId);
+    }
+
+    @Override
+    public List<Reservation> getReservationsByClient(Long clientId) {
+        return reservationRepository.getReservationsByClient(clientId);
     }
 }

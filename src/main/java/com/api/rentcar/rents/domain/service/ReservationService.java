@@ -16,6 +16,9 @@ public interface ReservationService {
     Reservation create(Long clientId,Long carId,Reservation reservation);
     ResponseEntity<?> delete(Long reservationId);
     Reservation updateStatus(Long reservationId, int status);
+    Reservation cancel(Long reservationId);
+    Reservation cancelPay(Long reservationId);
     Rent pay(Long reservationId, Rent rent);
     List<Reservation> getReservationsByOwner(Long ownerId);
+    List<Reservation> getReservationsByClient(Long clientId);
 }

@@ -13,4 +13,6 @@ public interface ReservationRepository extends JpaRepository<Reservation,Long> {
             "left join cars on cars.id=R.car_id " +
             "where cars.owner_id=?1 group by R.id", nativeQuery = true)
     List<Reservation> getReservationsByOwner(Long ownerId);
+    @Query(value="select * from reservations where client_id=?1 ", nativeQuery = true)
+    List<Reservation> getReservationsByClient(Long clientId);
 }

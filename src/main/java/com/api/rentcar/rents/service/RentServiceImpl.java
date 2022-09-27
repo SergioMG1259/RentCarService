@@ -71,4 +71,9 @@ public class RentServiceImpl implements RentService {
     public List<Rent> getRentsByClientId(Long clientId) {
         return rentRepository.getRentsByClientId(clientId);
     }
+
+    @Override
+    public List<Rent> getRentsByOwnerId(Long ownerId) {
+        return rentRepository.getRentsByClientId(ownerId);
+    }
 }

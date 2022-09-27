@@ -13,4 +13,9 @@ public interface RentRepository extends JpaRepository<Rent,Long> {
             "inner join rents as RE on RE.reservation_id=R.id " +
             "where R.client_id=?1 group by R.client_id; ", nativeQuery = true)
     List<Rent> getRentsByClientId(Long clientId);
+
+    @Query(value="select R.* from rents as R " +
+            "left join reservations as RV on R.reservation_id=RV.id " +
+            "inner join cars as C on C.id=RV.car_id where C.owner_id=?1 group by R.id; ", nativeQuery = true)
+    List<Rent> getRentsByOwnerId(Long ownerId);
 }

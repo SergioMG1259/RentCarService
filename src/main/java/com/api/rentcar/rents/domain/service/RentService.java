@@ -13,5 +13,6 @@ public interface RentService {
     Rent getById(Long rentId);
     Rent create(Long reservationId,Rent rent);
     List<Rent> getRentsByClientId(Long clientId);
+    List<Rent> getRentsByOwnerId(Long ownerId);
     /*ResponseEntity<?> delete(Long rentId);*/
 }

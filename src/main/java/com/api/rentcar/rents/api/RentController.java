@@ -41,4 +41,9 @@ public class RentController {
                                                     Pageable pageable){
         return mapper.modelListToPage(rentService.getRentsByClientId(clientId),pageable);
     }
+    @GetMapping("owner/{ownerId}")
+    public Page<RentResource> getAllRentsByOwnerId(@PathVariable("ownerId")Long ownerId,
+                                                    Pageable pageable){
+        return mapper.modelListToPage(rentService.getRentsByOwnerId(ownerId),pageable);
+    }
 }

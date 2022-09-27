@@ -64,7 +64,7 @@ public class CarServiceImpl implements CarService {
                 .orElseThrow(() -> new ResourceNotFoundException("Owner", ownerId));
         car.setOwner(owner);
         car.setRating(0.0);
-        if(owner.getPlan().getName()=="Free" && owner.getCars().size()<2){
+        /*if(owner.getPlan().getName()=="Free" && owner.getCars().size()<2){
             return carRepository.save(car);
         }
         if(owner.getPlan().getName()=="Medium" && owner.getCars().size()<4){
@@ -73,7 +73,8 @@ public class CarServiceImpl implements CarService {
         if(owner.getPlan().getName()=="Pro" && owner.getCars().size()<6){
             return carRepository.save(car);
         }
-        return null;
+        return null;*/
+        return carRepository.save(car);
     }
 
     @Override

@@ -37,7 +37,7 @@ public class CreateCarResource {
     @NotNull
     private String description;
 
-    @NotNull
+
     private Integer state;
 
 }
