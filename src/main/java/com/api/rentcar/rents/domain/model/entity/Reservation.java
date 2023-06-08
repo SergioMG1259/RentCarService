@@ -33,7 +33,7 @@ public class Reservation implements Serializable {
 
     @NotNull
     private int status;
-
+//client generate
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(
             name = "client_id",
