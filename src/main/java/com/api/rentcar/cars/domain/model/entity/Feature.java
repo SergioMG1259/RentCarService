@@ -2,7 +2,7 @@ package com.api.rentcar.cars.domain.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
-
+/*fix features of car*/
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
