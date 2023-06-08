@@ -4,7 +4,7 @@ import com.api.rentcar.users.domain.model.entity.Client;
 import com.api.rentcar.users.domain.model.entity.Owner;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
-
+/*add rating client/*
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
